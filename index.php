@@ -2,8 +2,6 @@
 date_default_timezone_set("Asia/Bangkok");
 require 'assets/system.php';
 
-echo 'OK';
-
 $urlTrends = 'https://trends.google.co.th/trends/api/dailytrends?hl=th&tz=-420&geo=TH&ns=15';
 $token = '5jIapLeITzueOnyNTe191ZzQuwBXcBkCGOKUpHPwatT';
 
@@ -24,5 +22,7 @@ foreach ($nameTrends as $key => $row) {
     $message .= ($key + 1).".".$row['title']." | ยอดค้นหา ".$row['traffic']." \n";
 }
 $message .= "\nติดตามเพิ่มเติมที่ https://thaip.bs/google-trends-th";
+
+echo $message;
 
 Trends::sendLineNotify($token, $message);
