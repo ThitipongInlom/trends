@@ -4,15 +4,9 @@ use GuzzleHttp\Client;
 
 class Trends 
 {
-    public function downloadJsonTrends($urlTrends)
+    public function readJsonTrends($urlTrends)
     {
-        $fileName = basename('trends.json');
-        file_put_contents('assets/'.$fileName, file_get_contents($urlTrends));
-    }
-
-    public function readJsonTrends()
-    {
-        $string = file_get_contents("assets/trends.json");
+        $string = file_get_contents($urlTrends);
         $new_string = str_replace(")]}',", "", $string);
         $json = json_decode($new_string, true);
         return $json['default']['trendingSearchesDays'];

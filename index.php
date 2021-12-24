@@ -3,10 +3,9 @@ date_default_timezone_set("Asia/Bangkok");
 require 'assets/system.php';
 
 $urlTrends = 'https://trends.google.co.th/trends/api/dailytrends?hl=th&tz=-420&geo=TH&ns=15';
-$token = '5jIapLeITzueOnyNTe191ZzQuwBXcBkCGOKUpHPwatT';
+$token = 'VYf6Wy2KJaaEZtSjVKyLgGtAB7JhZzxWjeNOqOwRPbm';
 
-Trends::downloadJsonTrends($urlTrends);
-$arrayTrends = Trends::readJsonTrends();
+$arrayTrends = Trends::readJsonTrends($urlTrends);
 $nameTrends = array();
 foreach ($arrayTrends as $key => $row) {
     if ($row['date'] == date('Ymd')) {
