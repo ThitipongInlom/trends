@@ -4,7 +4,7 @@ require 'vendor/autoload.php';
 use GuzzleHttp\Client;
 
 $urlTrends = 'https://trends.google.co.th/trends/api/dailytrends?hl=th&tz=-420&geo=TH&ns=15';
-$token = 'VYf6Wy2KJaaEZtSjVKyLgGtAB7JhZzxWjeNOqOwRPbm';
+$token = '5jIapLeITzueOnyNTe191ZzQuwBXcBkCGOKUpHPwatT';
 
 $arrayTrends = readJsonTrends($urlTrends);
 $nameTrends = array();
@@ -23,9 +23,8 @@ foreach ($nameTrends as $key => $row) {
 }
 $message .= "\nติดตามเพิ่มเติมที่ https://thaip.bs/google-trends-th";
 
-echo $message;
-
 sendLineNotify($token, $message);
+echo 'ส่งข้อมูลเรียบร้อยแล้ว';
 
 function readJsonTrends($urlTrends)
 {
