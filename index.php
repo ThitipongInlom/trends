@@ -1,11 +1,12 @@
 <?php
 date_default_timezone_set("Asia/Bangkok");
-require 'assets/system.php';
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
 
 $urlTrends = 'https://trends.google.co.th/trends/api/dailytrends?hl=th&tz=-420&geo=TH&ns=15';
 $token = 'VYf6Wy2KJaaEZtSjVKyLgGtAB7JhZzxWjeNOqOwRPbm';
 
-$arrayTrends = Trends::readJsonTrends($urlTrends);
+$arrayTrends = readJsonTrends($urlTrends);
 $nameTrends = array();
 foreach ($arrayTrends as $key => $row) {
     if ($row['date'] == date('Ymd')) {
@@ -24,4 +25,26 @@ $message .= "\nติดตามเพิ่มเติมที่ https://th
 
 echo $message;
 
-Trends::sendLineNotify($token, $message);
+sendLineNotify($token, $message);
+
+function readJsonTrends($urlTrends)
+{
+    $string = file_get_contents($urlTrends);
+    $new_string = str_replace(")]}',", "", $string);
+    $json = json_decode($new_string, true);
+    return $json['default']['trendingSearchesDays'];
+}
+
+function sendLineNotify($token, $message)
+{
+    $client = new Client();
+    $response = $client->request('POST', 'https://notify-api.line.me/api/notify', [
+        'headers' => [
+            'Authorization' => 'Bearer ' . $token,
+            'Content-Type' => 'application/x-www-form-urlencoded'
+        ],
+        'form_params' => [
+            'message' => $message
+        ]
+    ]);
+}
