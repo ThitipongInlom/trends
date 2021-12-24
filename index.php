@@ -21,7 +21,7 @@ $message = "Google Trends TH NH: 10 คำค้นหายอดนิยม�
 foreach ($nameTrends as $key => $row) {
     $message .= ($key + 1).".".$row['title']." | ยอดค้นหา ".$row['traffic']." \n";
 }
-$message .= "\nติดตามเพิ่มเติมที่ https://thaip.bs/google-trends-th";
+$message .= "\nติดตามเพิ่มเติมที่ https://trends.google.co.th/trends/trendingsearches/daily";
 
 sendLineNotify($token, $message);
 echo 'ส่งข้อมูลเรียบร้อยแล้ว';
